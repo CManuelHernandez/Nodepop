@@ -5,7 +5,34 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+       
+      <h1><%= title %></h1>
+      <p>Welcome to <%= title %></p>
+
+      <div class="container">
+        <% results.forEach(function(anuncio) { %>
+          <div class="ad">
+              <img src="<%= anuncio.image %>">
+            <div>
+              <p><%= anuncio.name %></p>
+              <p><%= anuncio.tags %></p>
+            </div>
+            <div>
+              <p><%= anuncio.price %>€</p>
+            </div>
+            <%= anuncio.venta %>
+                <% if(anuncio.sale === true){ %>
+                  <%= ('se busca') %>
+                <% } else{ %>
+                  <%= ('en venta') %>
+               <% } %>
+          </div>
+          <% }) %>
+        </div>
+
+  </body>
+
+  </body>
+    
   </body>
 </html>
