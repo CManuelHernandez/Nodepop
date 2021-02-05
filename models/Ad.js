@@ -11,6 +11,7 @@ const adSchema = mongoose.Schema({
     tags : { type: [String], index: true }
 });
 
+
 // creamos el modelo con el esquema definido
 const Ad = mongoose.model('Ad', adSchema);
 
