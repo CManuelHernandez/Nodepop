@@ -11,6 +11,15 @@ const adSchema = mongoose.Schema({
     tags : { type: [String], index: true }
 });
 
+adSchema.statics.listar = function(filtro, limit, skip, fields, sort) {
+    const query = Ad.find(filtro);
+    query.limit(limit);
+    query.skip(skip);
+    query.select(fields);
+    query.sort(sort);
+    return query.exec();
+  }
+
 
 // creamos el modelo con el esquema definido
 const Ad = mongoose.model('Ad', adSchema);
