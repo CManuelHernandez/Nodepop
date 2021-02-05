@@ -9,7 +9,50 @@ const Ad = require('../../models/Ad');
 // Listado de Anuncios
 router.get('/',async function(req, res, next) { // async para asyncawait
     try {
-        const resultado = await Ad.find();
+
+        const name = req.query.name;
+        const sale = req.query.sale;
+        const price = req.query.price;
+        const tag = req.query.tag;
+
+        const limit = parseInt(req.query.limit);
+        const skip = parseInt(req.query.skip);
+        const fields = req.query.fields;
+        const sort = req.query.sort;
+        
+        // crear el filtro vacio
+        const filter = {};
+
+        if (name) {
+            filter.name = new RegExp('^' + name);
+          }
+
+        if (sale) {
+            filter.sale = sale;
+        }
+
+        if (price) {
+            let rango;
+      
+            if (price.indexOf('-') >= 0) {
+                rango = price.split('-');
+                if (rango[0] === '' && rango[1] !== '') {
+                    filter.price = { '$lte': parseInt(rango[1]) };
+                } else if (rango[0] !== '' && rango[1] === '') {
+                    filter.price = { '$gte': parseInt(rango[0]) };
+                } else if (rango[0] !== '' && rango[1] !== '') {
+                    filter.price = { '$gte': parseInt(rango[0]), '$lte': parseInt(rango[1]) };
+                }
+            } else {
+                filter.price = price;
+            }
+        }
+             
+        if (tag) {
+            filter.tags = req.query.tag;
+        }
+
+        const resultado = await Ad.listar(filter, limit, skip, fields, sort);
         res.json(resultado);
       } catch (error) {
         next(error);
