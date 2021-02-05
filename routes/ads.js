@@ -29,6 +29,4 @@ router.post('/', function(req, res, next){
     res.json({recibido: req.body.num})
 });
 
-
-
 module.exports = router;
