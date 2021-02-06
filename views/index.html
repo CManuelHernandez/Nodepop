@@ -5,30 +5,51 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-       
-      <h1><%= title %></h1>
-      <p>Welcome to <%= title %></p>
+          
+      <% include header.html %>
 
       <div class="container">
-        <% results.forEach(function(anuncio) { %>
-          <div class="ad">
+         <% results.forEach(function(anuncio) { %> 
+           <div class="ad">
+             <div class="ad-data">
+             <div class="ad-image">
               <img src="<%= anuncio.image %>">
-            <div>
-              <p><%= anuncio.name %></p>
-              <p><%= anuncio.tags %></p>
-            </div>
-            <div>
-              <p><%= anuncio.price %>€</p>
-            </div>
-            <%= anuncio.venta %>
-                <% if(anuncio.sale === true){ %>
-                  <%= ('se busca') %>
-                <% } else{ %>
-                  <%= ('en venta') %>
-               <% } %>
-          </div>
-          <% }) %>
-        </div>
+             </div>
+              <div class="ad-info">
+                <div class="ad-main-info">
+                 <p><%= anuncio.name %></p>
+               </div>
+               <div class="ad-state">
+              <%= anuncio.venta %>
+                 <% if(anuncio.sale === true){ %>
+                  <p><%= ('Se busca') %></p>
+                 <% } else{ %> 
+                  <p><%= ('En venta') %></p>
+                <% } %>
+                  </div>
+                  <div class=ad-decription>
+                    <p>"Lorem ipsum dolor sit amet, 
+                      consectetur adipiscing elit, 
+                      sed do eiusmod tempor incididunt 
+                      ut labore et dolore magna aliqua. 
+                      Ut enim ad minim veniam, quis 
+                      nostrud exercitation ullamco 
+                      laboris nisi ut aliquip ex ea 
+                      commodo consequat.</p>
+                  </div>
+               <div class="ad-price">
+                 <p><%= anuncio.price %> €</p>
+               </div>
+                 <div class="ad-tags">
+                <p><%= anuncio.tags %></p>
+                </div>
+             </div>
+ 
+                 </div>
+                 </div>
+                  <% }) %> 
+           </div>
+         </div>
 
   </body>
 
