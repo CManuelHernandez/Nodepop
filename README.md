@@ -21,7 +21,7 @@ Deberemos recibir el siguiente feedback en la terminal.
 Datos cargados correctamente
 ###############################
 ```
-Tras esto cancelaremos el proceso de la terminal.
+Tras esto cancelaremos el proceso de la terminal. ( Opcional )
 ```
 ctrl + c
 ```
@@ -38,6 +38,20 @@ Para ejecutar la aplicación en entorno de desarrollo:
 ```shell
 npm run dev
 ```
+
+## Metodos del API
+GET /api/ads
+Listado de Anuncios
+
+POST /api/ads (body)
+Crear un Anuncio. Debe de encontrarse en el body
+
+PUT /api/ads:id (body)
+Actualizar un Anuncio.
+
+DELETE /api/ads:id
+Elimina un Anuncio.
+
 ## Ejemplos de funcionamiento ⚙️
 ### Partiendo de la Url http://localhost:3000/
 
@@ -78,6 +92,10 @@ http://localhost:3000/?sale=true
 - **Mostrar los 3 primeros anuncios** 
 ```
 http://localhost:3000/?limit=3
+```
+- **Se puede combinar los filtros** 
+```
+http://localhost:3000?name=b&sale=false&price300-350&tag=lifestyle
 ```
 
 ## Ejemplos de funcionamiento del api ⚙️
@@ -137,6 +155,11 @@ http://localhost:3000/api/ads?sale=true
 ```
 http://localhost:3000/api/ads?limit=3
 ```
+**Se puede combinar los filtros** 
+```
+http://localhost:3000/api/ads?name=b&sale=false&price300-350&tag=lifestyle
+```
+
 
 ## Autor ✒️
 * **CManuelHernandez** -  - [CManuelHernandez](https://github.com/CManuelHernandez)
