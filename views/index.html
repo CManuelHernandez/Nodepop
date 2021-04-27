@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+
           
       <% include header.html %>
 
@@ -28,6 +22,7 @@
                 <% } %>
                   </div>
                   <div class=ad-decription>
+                    <p><strong><%= __('Description')%></strong></p>
                     <p>"Lorem ipsum dolor sit amet, 
                       consectetur adipiscing elit, 
                       sed do eiusmod tempor incididunt 
@@ -49,11 +44,8 @@
                  </div>
                   <% }) %> 
            </div>
-         </div>
-
   </body>
 
-  </body>
-    
-  </body>
+  <% include footer.html %>
+
 </html>

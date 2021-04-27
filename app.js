@@ -28,10 +28,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/ads', require('./routes/api/ads'));
 
 /**
+ * Setup de i18n
+ */
+ const i18n = require('./lib/i18nConfigure');
+ app.use(i18n.init);
+
+/**
  * Rutas de mi Website
  */
 app.use('/', require('./routes/index'));
 app.use('/ads', require('./routes/index'));
+app.use('/change-locale', require('./routes/change-locale'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
