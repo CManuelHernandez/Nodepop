@@ -7,7 +7,7 @@ var logger = require('morgan');
 var app = express();
 
 // Conection to the BBDD on Mongose
-require('./lib/connectMongose');
+const mongooseConnection = require('./lib/connectMongose');
 
 require('./models/Ad');
 
@@ -22,16 +22,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const loginController = require('./routes/loginController');
+const jwtAuth = require('./lib/jwtAuth');
+
 /**
  * Rutas del API
  */
-app.use('/api/ads', require('./routes/api/ads'));
+// app.use('/api/ads', require('./routes/api/ads')); // Desactivar el requisito de JWT par obtener el listado de anuncios
+app.use('/api/ads', jwtAuth(), require('./routes/api/ads'));
+app.use('/api/authenticate', loginController.postJWT);
 
 /**
  * Setup de i18n
  */
  const i18n = require('./lib/i18nConfigure');
  app.use(i18n.init);
+
 
 /**
  * Rutas de mi Website
@@ -40,20 +46,38 @@ app.use('/', require('./routes/index'));
 app.use('/ads', require('./routes/index'));
 app.use('/change-locale', require('./routes/change-locale'));
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
 // error handler
+// error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
+
+  if(err.array){
+    err.status = 422;
+    const infoError = err.array({onlyFirstError:true})[0];
+    err.message = isApi(req) ? 
+      {message: 'Not valid ',errores:err.mapped()}:
+      `Not valid - ${infoError.param} ${infoError.msg}`
+  }
+  res.status(err.status || 500);
+  if(isApi(req)){
+    res.json({success:false,error:err.message});
+    return;
+  }
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
   res.render('error');
 });
+
+function isApi(req){
+     return req.originalUrl.indexOf('apiv')!==0;
+  }
 
 module.exports = app;
