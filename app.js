@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const multer = require('multer');
 
 var app = express();
 
@@ -24,6 +25,30 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const loginController = require('./routes/loginController');
 const jwtAuth = require('./lib/jwtAuth');
+
+// middleware para subir image
+
+const multerStorage = multer.diskStorage({
+  destination: 'public/images/ads',
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+
+app.use(multer({
+  storage: multerStorage,
+  dest: './public/images/ads',
+  limits: {fileSize: 1000000},
+  fileFilter: (req, file, cb) => {
+    const filetypes = /jpeg|jpg|png|gif/;
+    const mimetype = filetypes.test(file.mimetype);
+    const extname = filetypes.test(path.extname(file.originalname));
+    if (mimetype && extname) {
+      return cb(null, true);
+    }
+    cb("Error: the file must be a valid image");
+  }
+}).single('image'));
 
 /**
  * Rutas del API

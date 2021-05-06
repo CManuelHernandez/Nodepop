@@ -80,16 +80,9 @@ router.get('/:id', async (req, res, next) => {
 // POST / api/ad (body)
 // Crear un Anuncio
 
-const multerStorage = multer.diskStorage({
-    destination: 'public/images/ads',
-    filename: (req, file, cb) => {
-      cb(null, file.originalname);
-    },
-});
-
-const upload = multer({ storage: multerStorage });
-
-router.post('/', upload.single('image'), async (req, res, next) =>{
+const Requester = require('../../lib/microservices/thumbClient');
+router.post('/', async (req, res, next) =>{
+    console.log(req.file);
     try {
         const adData = req.body;
 
@@ -100,6 +93,8 @@ router.post('/', upload.single('image'), async (req, res, next) =>{
         const createdAd = await ad.save();
 
         res.status(201).json({result: createdAd});
+        Requester(req.file.originalname);
+        console.log(anuncioGuardado);
     } catch (error) {
         next(error);
     }
