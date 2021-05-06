@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+const multer = require('multer');
 
 const Ad = require('../../models/Ad');
 
@@ -78,9 +79,21 @@ router.get('/:id', async (req, res, next) => {
 
 // POST / api/ad (body)
 // Crear un Anuncio
-router.post('/', async (req, res, next) =>{
+
+const multerStorage = multer.diskStorage({
+    destination: 'public/images/ads',
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
+    },
+});
+
+const upload = multer({ storage: multerStorage });
+
+router.post('/', upload.single('image'), async (req, res, next) =>{
     try {
         const adData = req.body;
+
+        adData.image = req.file.originalname;
 
         const ad = new Ad(adData);
 
