@@ -78,7 +78,6 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-// error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
 

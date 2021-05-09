@@ -77,7 +77,7 @@ router.get('/:id', async (req, res, next) => {
     }
 });
 
-// POST / api/ad (body)
+// POST / api/ads (body)
 // Crear un Anuncio
 
 const Requester = require('../../lib/microservices/thumbClient');
@@ -92,9 +92,9 @@ router.post('/', async (req, res, next) =>{
 
         const createdAd = await ad.save();
 
-        res.status(201).json({result: createdAd});
         Requester(req.file.originalname);
-        console.log(anuncioGuardado);
+        res.status(201).json({result: createdAd});
+        // console.log(anuncioGuardado);
     } catch (error) {
         next(error);
     }
