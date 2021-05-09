@@ -64,6 +64,7 @@ Si tenemos éxito en la autenticación se nos devolverá un JSON como el siguien
 }
 ```
 
+
 ## Internacionalización
 Consiste en la funcionalidad de cambiar el idioma en la vista desde el front.
 Se dispone de un selector de idioma en Español y en Inglés.
