@@ -3,56 +3,56 @@
         "name":"Bicicleta",
         "sale":false,
         "price":320,
-        "image":"images/bici.jpg",
+        "image":"images/ads/bici.jpg",
         "tags":"lifestyle"
     },
     {
         "name":"iPhone",
         "sale":true,
         "price":500,
-        "image":"images/iphone.jpg",
+        "image":"images/ads/iphone.jpg",
         "tags":[ "lifestyle", "mobile"]
     },
     {
         "name":"Gafas de sol",
         "sale":true,
         "price":70.50,
-        "image":"images/gafas.jpg",
+        "image":"images/ads/gafas.jpg",
         "tags":"lifestyle"
     },
     {
         "name":"Patinete",
         "sale":true,
         "price":300,
-        "image":"images/patinete.jpg",
+        "image":"images/ads/patinete.jpg",
         "tags":[ "lifestyle", "motor"]
     },
     {
         "name":"Laptop",
         "sale":false,
         "price":599.90,
-        "image":"images/laptop.jpg",
+        "image":"images/ads/laptop.jpg",
         "tags":[ "work", "mobile"]
     },
     {
         "name":"Casco",
         "sale":true,
         "price":35,
-        "image":"images/casco.jpg",
+        "image":"images/ads/casco.jpg",
         "tags":"work"
     },
     {
         "name":"Reloj",
         "sale":false,
         "price":160,
-        "image":"images/reloj.jpg",
+        "image":"images/ads/reloj.jpg",
         "tags":"lifestyle"
     },
     {
         "name":"Mochila",
         "sale":true,
         "price":20,
-        "image":"images/mochila.jpg",
+        "image":"images/ads/mochila.jpg",
         "tags": [ "lifestyle", "work"]
     }
 ]}
