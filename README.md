@@ -9,6 +9,9 @@ Dedes la carpeta raíz *(Nodepop)* instalaremos las dependencias mediante la ter
 ```shell
 npm install
 ```
+**Debe copiar .env.example a .env y revisar su configuración**
+Para que funcione la aplicación se deberá sustituir el archivo .env_example por .env.
+
 ### _Carga de las bases de datos:_
 Para cargar o reiniciar datos de la base de datos *MongoDB*, se necesita ejecutar el archivo *install_db* que se encuentra la carpeta *scripts*.
 Esto se realiza mediante el siguiente comando.
@@ -38,6 +41,41 @@ Para ejecutar la aplicación en entorno de desarrollo:
 ```shell
 npm run dev
 ```
+
+### Llamada POST AUTH
+
+Se llama con post a /auth para obtener el token de autenticación.
+
+Este post espera en el body dos parametros. Un user, el cual debe ser un correo electrónico y una password.
+
+Si el username o la password son incorrecta la respuesta del servidor será un JSON tal que:
+
+```
+{
+    "errors": "Username or password wrong"
+}
+```
+
+Si tenemos éxito en la autenticación se nos devolverá un JSON como el siguiente:
+
+```
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDk3ZTkzYzgyMTkyYzNmZTgyMmQ5NmMiLCJpYXQiOjE2MjA1Njg4NDQsImV4cCI6MTYyMDU3NjA0NH0.XC0vvO97J9i6yy1bAbkvzxZbnMybpVTn3RNzZrdzpLQ"
+}
+```
+
+## Internacionalización
+Consiste en la funcionalidad de cambiar el idioma en la vista desde el front.
+Se dispone de un selector de idioma en Español y en Inglés.
+
+## Microservicios
+
+El API cuenta con un microservicio que crea las imagenes mas pequeñas de las que las sube el usuario en forma de Thumbnail.
+Este microservicio se encuentra integrado mediante la librería Cote.
+El requester se activa automaticamente al iniciar la aplicación, 
+El consumer hay que activarlo manualmente, tenemos que ir a la ruta /lib/microservices y ejecutar el archivo mediante el comando "nodemon thumbService.js"
+
+Al subir una imgen se generará un Thumbnail, con el mismo nombre de archivo asignado por el servidor pero como prefijo se añadirá "tn-".
 
 ## Metodos del API
 GET /api/ads
